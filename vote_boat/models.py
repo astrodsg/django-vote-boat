@@ -16,8 +16,7 @@ from django.contrib.auth.models import AbstractBaseUser
 # ########################################################################### #
 
 class User (models.Model):
-    """ Create user accounts
-    """
+    """ Create user accounts """
     # ----------------------- account type
     TMP_ACCOUNT = 0
     PERM_ACCOUNT = 1
@@ -33,9 +32,12 @@ class User (models.Model):
     is_active = models.BooleanField(ugettext_lazy('active'), default=True,
         help_text=ugettext_lazy('Designates whether this user should be treated as '
                     'active. Unselect this instead of deleting accounts.'))
-    date_joined = models.DateTimeField(ugettext_lazy('date joined'), default=timezone.now)
-    last_login = models.DateTimeField(ugettext_lazy('date joined'), default=timezone.now)    
+    creation_date = models.DateTimeField(ugettext_lazy('date joined'), default=timezone.now)
+    last_login_date = models.DateTimeField(ugettext_lazy('last login'), default=timezone.now)    
     USERNAME_FIELD = 'username'
+
+    class Meta:
+        ordering = ["username","last_login_date"]
 
     def __unicode__(self):
         return u"User : {}".format(self.username)
@@ -62,7 +64,7 @@ class User (models.Model):
             send_mail(subject, message, from_email, [self.email])
 
 class Poll (models.Model):
-
+    """ Create a set of ideas to vote on """
     # ----------------------- editable 
     title = models.CharField(max_length=100)
     description = models.CharField(max_length=300,default="",blank=True)
@@ -71,20 +73,57 @@ class Poll (models.Model):
     # ----------------------- added 
     admin_url = models.URLField(blank=True)
     participant_url = models.URLField(blank=True)    
-    create_time = models.DateTimeField(auto_now_add=True)
-    update_time = models.DateTimeField(auto_now=True)    
+    creation_date = models.DateTimeField(ugettext_lazy('created'), default=timezone.now)
+    update_date = models.DateTimeField(ugettext_lazy('updated'), default=timezone.now)    
     def __unicode__ (self):
         return u"Poll : {}".format(self.title)
 
+class IdeaTag (models.Model):
+    """ Create tags for the ideas """
+    tag = models.CharField(max_length=32)
+    
+    def __unicode__ (self):
+        return self.tag
+    
 class Idea (models.Model):
+    """ Create an idea to vote on """
     poll_id = models.ForeignKey(Poll,on_delete=models.CASCADE)
     title = models.CharField(max_length=100)
-    description = models.CharField(max_length=300,default="")
+    description = models.CharField(max_length=300,default="",blank=True)
+    users = models.ManyToManyField(User, through='Vote')
+    tags = models.ManyToManyField(IdeaTag,blank=True)
     
+    # ----------------------- times
+    creation_date = models.DateTimeField(ugettext_lazy('created'), default=timezone.now)
+    update_date = models.DateTimeField(ugettext_lazy('updated'), default=timezone.now)    
+       
     def __unicode__ (self):
         return u"Idea : {}".format(self.title)   
 
+class Vote (models.Model):
+    """ Register a vote for a particular idea """
+    # ----------------------- 
+    idea_id = models.ForeignKey(Idea,on_delete=models.CASCADE)
+    user_id = models.ForeignKey(User,on_delete=models.CASCADE)    
     
+    # ----------------------- times
+    creation_date = models.DateTimeField(ugettext_lazy('created'), default=timezone.now)
+    update_date = models.DateTimeField(ugettext_lazy('updated'), default=timezone.now)    
+            
+    # ----------------------- votes
+    DOWN_VOTE = 0
+    UP_VOTE = 1
+    vote_value = models.IntegerField(null=True)
+    
+    comment = models.CharField(max_length=300,default="",blank=True)
+    
+    def __unicode__ (self):
+        # TODO: get the username and the idea title        
+        return "<Vote {} {}>".format(self.idea_id,self.user_id)
+        
+class PollVoteNumber (models.Model):
+    # ----------------------- 
+    poll_id = models.ForeignKey(Poll,on_delete=models.CASCADE)
+    user_id = models.ForeignKey(User,on_delete=models.CASCADE)    
+    number_of_votes = models.IntegerField(default=0)
 
-    
-    
