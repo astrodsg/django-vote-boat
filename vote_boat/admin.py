@@ -16,7 +16,7 @@ class VoteAdmin (admin.ModelAdmin):
 class IdeaAdmin (admin.ModelAdmin):
     list_display = ("poll_id","title","creation_date")
     admin_order_field = "poll_id"
-    list_filter = ('poll_id')
+    list_filter = ('poll_id',)
 
 
 admin.site.register(Poll,PollAdmin)
