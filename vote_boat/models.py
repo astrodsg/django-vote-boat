@@ -23,7 +23,7 @@ class User (models.Model):
     account_type = models.IntegerField(default=TMP_ACCOUNT)
 
     # ----------------------- User information
-    username = models.CharField(max_length=30,unique=True)
+    username = models.CharField(max_length=30)
     first_name = models.CharField(ugettext_lazy('first name'), max_length=30, blank=True)
     last_name = models.CharField(ugettext_lazy('last name'), max_length=30, blank=True)
     email = models.EmailField(ugettext_lazy('email address'), max_length=254, blank=True,null=True)
@@ -40,7 +40,7 @@ class User (models.Model):
         ordering = ["username","last_login_date"]
 
     def __unicode__(self):
-        return u"User : {}".format(self.username)
+        return u"User : {} {}".format(self.username,self.id)
 
     def get_absolute_url(self):
         return "/users/{}/".format(urlquote(self.email))
@@ -66,8 +66,8 @@ class User (models.Model):
 class Poll (models.Model):
     """ Create a set of ideas to vote on """
     # ----------------------- editable 
-    title = models.CharField(max_length=100)
-    description = models.CharField(max_length=300,default="",blank=True)
+    title = models.CharField(max_length=100,help_text="Title")
+    description = models.CharField(max_length=300,default="",help_text="Description",blank=True)
     admin_user_id = models.ForeignKey(User)    
 
     # ----------------------- added 
@@ -75,6 +75,7 @@ class Poll (models.Model):
     participant_url = models.URLField(blank=True)    
     creation_date = models.DateTimeField(ugettext_lazy('created'), default=timezone.now)
     update_date = models.DateTimeField(ugettext_lazy('updated'), default=timezone.now)    
+    
     def __unicode__ (self):
         return u"Poll : {}".format(self.title)
 
