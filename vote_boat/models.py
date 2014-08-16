@@ -69,10 +69,10 @@ class Poll (models.Model):
     title = models.CharField(max_length=100,help_text="Title")
     description = models.CharField(max_length=300,default="",help_text="Description",blank=True)
     admin_user_id = models.ForeignKey(User)    
-
+    
     # ----------------------- added 
     admin_url = models.URLField(blank=True)
-    participant_url = models.URLField(blank=True)    
+    participant_url = models.URLField(blank=True)
     creation_date = models.DateTimeField(ugettext_lazy('created'), default=timezone.now)
     update_date = models.DateTimeField(ugettext_lazy('updated'), default=timezone.now)    
     
@@ -94,12 +94,27 @@ class Idea (models.Model):
     users = models.ManyToManyField(User, through='Vote')
     tags = models.ManyToManyField(IdeaTag,blank=True)
     
+    # priority : aka number of positive-negative votes, for easy sorting
+    
     # ----------------------- times
     creation_date = models.DateTimeField(ugettext_lazy('created'), default=timezone.now)
     update_date = models.DateTimeField(ugettext_lazy('updated'), default=timezone.now)    
-       
+         
     def __unicode__ (self):
         return u"Idea : {}".format(self.title)   
+
+    def ideas_by_poll (self,poll,sorting="none"):
+        """
+        
+        Parameters
+        poll : Poll.object or Poll.object.id
+        sorting : ["none"], "ascending", "descending"
+        
+        """
+        # filter all items based on poll
+        ideas = self.objects.filter(poll_id=poll)
+        # optionally sort the ideas
+        return ideas
 
 class Vote (models.Model):
     """ Register a vote for a particular idea """
