@@ -1,0 +1,81 @@
+.form_vote_boat    {
+    margin:auto;
+    position:relative;
+    width:550px;
+    height:450px;
+    font-family: "Times New Roman",Georgia,Serif;
+    font-size: 14px;
+    font-style: bold;
+    line-height: 24px;
+    font-weight: bold;
+    color: #09C;
+    text-decoration: none;
+    -webkit-border-radius: 10px;
+    -moz-border-radius: 10px;
+    border-radius: 10px;
+    padding:10px;
+}
+
+.vote_boat_input    {
+    width:375px;
+    display:block;
+    border: 1px solid #999;
+    height: 25px;
+    margin-bottom: 50px;
+    -webkit-box-shadow: 0px 0px 8px rgba(0, 0, 0, 0.3);
+    -moz-box-shadow: 0px 0px 8px rgba(0, 0, 0, 0.3);
+    box-shadow: 0px 0px 8px rgba(0, 0, 0, 0.3);
+    border-radius:5px
+}
+    #id_username {
+    width:150px; 
+    }
+    
+    #id_email {
+    width:250px;
+    }
+    
+    #id_title {
+    width:150;
+    }
+    
+.vote_boat_text_area    {
+    width:375px;
+    display:block;
+    border: 1px solid #999;
+    height: 100px;
+    margin-bottom: 50px;
+    -webkit-box-shadow: 0px 0px 8px rgba(0, 0, 0, 0.3);
+    -moz-box-shadow: 0px 0px 8px rgba(0, 0, 0, 0.3);
+    box-shadow: 0px 0px 8px rgba(0, 0, 0, 0.3);
+    border-radius:5px;
+}
+
+.button {
+    width:100px;
+    position:absolute;
+/*     right:20px; */
+/*     bottom:-200px; */
+    background:#fff;
+    color:#09C;
+    font-family: Tahoma, Geneva, sans-serif;
+    height:30px;
+    -webkit-border-radius: 15px;
+    -moz-border-radius: 15px;
+    border-radius: 5px;
+    border: 1p solid #999;
+}
+    .button:hover {
+        background:#09C;
+        color:#fff;
+    }
+/* 
+YOU NEED
+Fields:
+name
+email
+poll
+description
+ */
+/* Tahoma, Geneva, sans-serif; */
+
