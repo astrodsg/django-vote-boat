@@ -1,11 +1,42 @@
+import re 
+
 from django.shortcuts import render
 from django.shortcuts import render_to_response
 from django.template import RequestContext
 from django.http.request import QueryDict
 
-from vote_boat.models import Poll,User
+from vote_boat.models import Poll,User,Idea
 from vote_boat.forms import PollForm,UsernameForm
 
+
+def ideas (request,poll_ideas_url):
+    """ Primary ideas page
+    
+    """
+    # get request context
+    context = RequestContext(request)
+
+    s = re.search("(.*)-(\d*)$",poll_ideas_url.replace("_"," "))    
+    poll_name = s.groups()[0]
+    poll_id = s.groups()[1]
+
+    try:    
+        poll = Poll.objects.get(id=poll_id)
+        # poll = Poll.objects.filter(admin_url=poll_ideas_url)
+    except Poll.DoesNotExist as e: 
+        # TODO: something better
+        raise e
+    
+    # get all ideas
+    # TODO: check context for something which says how to sort the ideas
+    # TODO: think: optimize? should we figure out and sort different sortings?
+    ideas = Idea.ideas_by_poll(poll)    
+    
+    # create context objects
+    context_dict = dict(ideas=ideas,poll=poll)
+    
+    return render_to_response(template,context_dict,context)
+    
 def create_new_poll (template,successful_response):
     def new_poll (request):
         # get request context
@@ -36,7 +67,8 @@ def create_new_poll (template,successful_response):
         else:
             user = UsernameForm()     
             poll = PollForm()   
-        return render_to_response(template, {'poll': poll,'user':user}, context)
+        context_dict = {'poll': poll,'user':user}
+        return render_to_response(template, context_dict, context)
     return new_poll
 
 
