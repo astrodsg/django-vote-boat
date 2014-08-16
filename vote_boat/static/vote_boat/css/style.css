@@ -1,10 +1,10 @@
 .form_vote_boat    {
     margin:auto;
     position:relative;
-    width:550px;
-    height:450px;
+    width: 550px; /* 550px */
+    height: auto; /* 450px */
     font-family: "Times New Roman",Georgia,Serif;
-    font-size: 14px;
+    font-size: 16px;
     font-style: bold;
     line-height: 24px;
     font-weight: bold;
@@ -13,7 +13,12 @@
     -webkit-border-radius: 10px;
     -moz-border-radius: 10px;
     border-radius: 10px;
-    padding:10px;
+    padding:5px;
+}
+
+#new_poll {
+    font-size: 24px;
+    font-style: bold;
 }
 
 .vote_boat_input    {
@@ -21,12 +26,13 @@
     display:block;
     border: 1px solid #999;
     height: 25px;
-    margin-bottom: 50px;
+    margin-bottom: 10px;/* 50px; */
     -webkit-box-shadow: 0px 0px 8px rgba(0, 0, 0, 0.3);
     -moz-box-shadow: 0px 0px 8px rgba(0, 0, 0, 0.3);
     box-shadow: 0px 0px 8px rgba(0, 0, 0, 0.3);
     border-radius:5px
 }
+    
     #id_username {
     width:150px; 
     }
@@ -35,16 +41,12 @@
     width:250px;
     }
     
-    #id_title {
-    width:150;
-    }
-    
 .vote_boat_text_area    {
     width:375px;
     display:block;
     border: 1px solid #999;
     height: 100px;
-    margin-bottom: 50px;
+    margin-bottom: 10px;
     -webkit-box-shadow: 0px 0px 8px rgba(0, 0, 0, 0.3);
     -moz-box-shadow: 0px 0px 8px rgba(0, 0, 0, 0.3);
     box-shadow: 0px 0px 8px rgba(0, 0, 0, 0.3);

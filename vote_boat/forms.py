@@ -18,7 +18,7 @@ class PollForm (forms.ModelForm):
     def __init__ (self, *args, **kwargs):
         # style the new poll form
         forms.ModelForm.__init__(self, *args, **kwargs)
-        self.fields['title'].widget.attrs['class'] = [css_vote_boat_input]    
+        self.fields['title'].widget.attrs['class'] = css_vote_boat_input
         self.fields["description"].widget = forms.Textarea(attrs={'class':css_vote_boat_text_area})
         
 class UsernameForm (forms.ModelForm):
