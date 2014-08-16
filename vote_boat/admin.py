@@ -7,7 +7,7 @@ class UserAdmin (admin.ModelAdmin):
     list_display = ('username', 'first_name', 'last_name','email')
 
 class PollAdmin (admin.ModelAdmin):
-    list_display = ('title','creation_date','admin_url','participant_url')
+    list_display = ('id','title','creation_date','admin_url','participant_url')
     
 class VoteAdmin (admin.ModelAdmin):
     list_display = ('user_id','idea_id','vote_value')
