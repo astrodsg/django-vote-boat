@@ -15,7 +15,7 @@ def ideas (request,poll_ideas_url):
     """
     # get request context
     context = RequestContext(request)
-
+    
     s = re.search("(.*)-(\d*)$",poll_ideas_url.replace("_"," "))    
     poll_name = s.groups()[0]
     poll_id = s.groups()[1]
@@ -26,15 +26,17 @@ def ideas (request,poll_ideas_url):
     except Poll.DoesNotExist as e: 
         # TODO: something better
         raise e
-    
+    import pdb;pdb.set_trace()    
     # get all ideas
     # TODO: check context for something which says how to sort the ideas
     # TODO: think: optimize? should we figure out and sort different sortings?
-    ideas = Idea.ideas_by_poll(poll)    
+    poll_ideas = Idea.objects.filter(poll_id=poll)
+    
+    # sorting to the ideas. number votes 
     
     # create context objects
-    context_dict = dict(ideas=ideas,poll=poll)
-    
+    context_dict = dict(ideas=poll_ideas,poll=poll)
+
     return render_to_response(template,context_dict,context)
     
 def create_new_poll (template,successful_response):
