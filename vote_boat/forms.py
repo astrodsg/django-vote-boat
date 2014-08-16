@@ -2,6 +2,9 @@ from django import forms
 from vote_boat.models import Poll, User
 
 
+css_vote_boat_input = 'vote_boat_input'
+css_vote_boat_text_area = "vote_boat_text_area"
+
 class PollForm (forms.ModelForm):    
     description = forms.CharField(max_length=300,required=False)
     # create a new user
@@ -15,14 +18,8 @@ class PollForm (forms.ModelForm):
     def __init__ (self, *args, **kwargs):
         # style the new poll form
         forms.ModelForm.__init__(self, *args, **kwargs)
-        for key in ["title","username","email"]:
-            self.feilds[key].widget.attrs.update({'class' : 'vote_boat_input' })
-        
-        # set up the description formatting
-        self.fields["description"].widget = forms.Textarea
-        self.fields["description"].widget.attrs.upddate('class': 'vote_boat_text_area')
-            
-    
+        self.fields['title'].widget.attrs['class'] = [css_vote_boat_input]    
+        self.fields["description"].widget = forms.Textarea(attrs={'class':css_vote_boat_text_area})
         
 class UsernameForm (forms.ModelForm):
     username = forms.CharField(max_length=30,help_text="Username:")
@@ -31,5 +28,11 @@ class UsernameForm (forms.ModelForm):
     class Meta:
         model = User
         exclude = ('account_type','first_name','last_name','is_active','creation_date','last_login_date')
-        
+    
+    def __init__ (self,*args,**kwargs):
+        forms.ModelForm.__init__(self, *args, **kwargs)
+        self.fields['username'].widget.attrs['class'] = css_vote_boat_input 
+        self.fields['email'].widget.attrs['class'] = css_vote_boat_input     
+
+
 
