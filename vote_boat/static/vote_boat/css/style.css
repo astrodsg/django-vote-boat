@@ -1,3 +1,16 @@
+.nav-ideas {
+    margin: auto;
+    height: 26px;
+    color: #1C3868;
+    padding: 2px;        
+}
+
+.right-arrow:after {
+    content:'\25BA';
+    padding-left: 4px;
+    padding-right: 4px;
+}
+
 .form_vote_boat    {
     margin:auto;
     position:relative;
@@ -8,7 +21,7 @@
     font-style: bold;
     line-height: 24px;
     font-weight: bold;
-    color: #09C;
+    color: #000;
     text-decoration: none;
     -webkit-border-radius: 10px;
     -moz-border-radius: 10px;
@@ -17,7 +30,7 @@
 }
 
 #new_poll {
-    font-size: 24px;
+    font-size: 34px;
     font-style: bold;
 }
 
@@ -58,8 +71,9 @@
     position:absolute;
 /*     right:20px; */
 /*     bottom:-200px; */
-    background:#fff;
-    color:#09C;
+    background:#FAFAFA;
+    color:#000;
+    font-style: bold;    
     font-family: Tahoma, Geneva, sans-serif;
     height:30px;
     -webkit-border-radius: 15px;
@@ -69,7 +83,7 @@
 }
     .button:hover {
         background:#09C;
-        color:#fff;
+        color:#FAFAFA;
     }
 /* 
 YOU NEED
