@@ -1,3 +1,6 @@
+{% extends "vote_boat/ideas_layout.html" %}
+
+<!-- 
 <section class="idea">
     <h3> {{ idea_title }} </h3>
     <p> {{ idea_description }} </p>
@@ -9,4 +12,7 @@
     <button type="radio" text="{{ for }}"/>
     <button type="radio" text="{{ against }}"/>
     </form>
-</section>
+ -->
+{% block idea %}
+<p>an idea --> {{ idea.title }}</p>
+{% endblock %}

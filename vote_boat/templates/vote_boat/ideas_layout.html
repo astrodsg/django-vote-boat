@@ -1,0 +1,31 @@
+{% extends "vote_boat_site/base.html" %}
+{% load staticfiles %}
+
+{% block title %}
+Vote Boat : Poll
+{% endblock %}
+
+<!-- 
+{% block styles-plus %}
+<link rel="stylesheet" type="text/css" href='{% static "vote_boat/css/style.css" %}' />
+{% endblock %}
+ -->
+
+{% block content %}
+<article>    
+    <!-- - - - - - - - - Poll - - - - - - - - - - - - -->
+    <h2> Title : {{ poll.title }}</h2>
+
+    <!-- - - - - - - - - Ideas - - - - - - - - - - - - -->
+    {% for idea in ideas %}
+        {% block idea %}
+        <p>{{ idea.title }}</p>
+        {% endblock %}
+    {% endfor %}
+</article>
+{% endblock %}
+
+
+
+
+
