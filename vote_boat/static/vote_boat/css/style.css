@@ -14,7 +14,7 @@
 .form_vote_boat    {
     margin:auto;
     position:relative;
-    width: 550px; /* 550px */
+    width: auto; /* 550px */
     height: auto; /* 450px */
     font-family: "Times New Roman",Georgia,Serif;
     font-size: 16px;
@@ -56,6 +56,7 @@
     
 .vote_boat_text_area    {
     width:375px;
+    height:100px;
     display:block;
     border: 1px solid #999;
     height: 100px;
